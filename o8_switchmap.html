@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>Click me</button>
+
+
+    <script src="lib/Rx.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+
+    <script type="text/babel">
+var button = document.querySelector('button');
+var obs1 = Rx.Observable.fromEvent(button, 'click');
+var obs2 = Rx.Observable.interval(1000);
+
+// obs1.subscribe(
+//     (event) => obs2.subscribe(
+//         (value) => console.log(value)
+//     ) 
+// );
+
+obs1.switchMap(
+    event => {
+        return obs2
+    } 
+).subscribe(
+    (value) => console.log(value)
+);
+
+/*
+HttpRequest autocompletion functionality,
+e.g. when user changes his opinion the old request
+should be droppped and only the new one should be handeled
+
+
+The old requests should be canceled!
+switches the values of the observables
+and cancel the old values if the button is clicked again
+
+We switch 2 observables and we cancel the old ones.
+
+*/
+
+
+</script>
+
+</body>
+
+</html>

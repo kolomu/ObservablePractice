@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+
+
+    <script src="lib/Rx.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+
+    <script type="text/babel">
+var input = document.querySelector('input');
+var observable = Rx.Observable.fromEvent(input, 'input');
+
+observable
+.map(event => event.target.value)
+.debounceTime(2000)
+.distinctUntilChanged()
+.subscribe({
+    next: function(value) {
+        console.log(value);
+    }
+});
+
+/*
+debounceTime & distinctUtilChanged
+To control how often we do something
+
+throttle & debounceTime 
+debouneTime only if we stop typing then it gets the current value
+has there been a pause between emitting events?
+if yes take the latest value and send request to server
+
+
+distintUntilChanged
+Filter out values which are equal to the last one
+
+*/
+
+
+</script>
+
+</body>
+
+</html>

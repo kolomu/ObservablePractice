@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>Click Me!</button>
+
+
+
+    <script src="lib/Rx.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+
+    <script type="text/babel">
+/* Observable Operators
+map(data) -> Um die Daten zu transformieren, die map 
+funktion wird auf jedes Value angewendet!
+throttleTime(2000) which makes sure that no more
+than 1 value can reach the next function per x milliseconds
+
+interval
+*/
+
+var observable = Rx.Observable.interval(1000);
+var observer = {
+    next: function(value) {
+        console.log(value);
+    }
+};
+
+observable.map(function(value){
+    return value;
+}).throttleTime(2050)
+  .subscribe(observer);
+
+
+</script>
+
+</body>
+
+</html>

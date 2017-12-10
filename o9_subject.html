@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>Click Me!</button>
+
+
+
+    <script src="lib/Rx.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+
+    <script type="text/babel">
+var subject = new Rx.Subject(); // like an event emitter
+
+subject.subscribe({
+    next: function(value) {
+        console.log(value);
+    },
+    error: function(error) {
+        console.log(error);
+    },
+    complete: function() {
+        console.log('Complete');
+    }
+});
+
+subject.subscribe({
+    next: function(value) {
+        console.log(value);
+    }
+});
+
+
+subject.next('A new data piece!');
+subject.complete();
+
+// Works like an observable but u can decide
+// when something happens
+</script>
+
+</body>
+
+</html>

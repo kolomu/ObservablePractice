@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>Click Me!</button>
+
+
+
+<script src="lib/Rx.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+
+<script type="text/babel">
+var button = document.querySelector('button');
+
+// button.addEventListener('click', (event) =>  {console.log(event)})
+
+// with RXJS fromEvent - returns observable
+Rx.Observable.fromEvent(button, 'click')
+    .throttleTime(1000)
+    .map( (data) => { return data.clientY })
+    .subscribe(
+      (coordinate) => console.log(coordinate)
+);
+
+/*  
+Observables => funnel like setup
+event data travels from top to bottom
+from datasource (click event)
+to the code we execute in subscribe function
+
+Powerful because of the operators
+allowed to transform how the data is handeled, used or looks like
+
+e.g. throttletime.
+
+Funnel Like appraoch to handel asynchronous code
++ operators to trnasform the data
+*/
+</script>
+
+</body>
+</html>
